@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>TWO</title>
+</head>
+
+<body>
+  <!-- Retrieved data will be dumped here -->
+
+  <div id="movies-view"></div>
+  <div id="title-view"></div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    // This is our API key. Add your own API key between the ""
+//     $.ajax({
+//     method: "GET",
+//     url: "https://investors-exchange-iex-trading.p.rapidapi.com/stock/tsla/time-series",
+//     headers: {
+//         "X-RapidAPI-Host": "investors-exchange-iex-trading.p.rapidapi.com",
+//         "X-RapidAPI-Key":
+//         "21370ff820msh8941fd75a1c6abdp18695ajsn9e7ab086180a"
+//     }
+// }).then(function (result) {
+//     console.log(result);
+// })
+
+
+
+var searchOMDB = function(name) {
+  $.ajax({
+    method: "GET",
+    url: "https://omgvamp-hearthstone-v1.p.rapidapi.com/cards",
+    headers: {
+        "X-RapidAPI-Host": "omgvamp-hearthstone-v1.p.rapidapi.com",
+        "X-RapidAPI-Key":
+        "21370ff820msh8941fd75a1c6abdp18695ajsn9e7ab086180a"
+    }
+}).then(function (result) {
+
+    console.log(result);
+
+
+
+// Creates AJAX call for the specific movie button being clicked
+
+  
+
+  // Retrieves the image
+  // var movie = $(this).attr("data-name");
+
+  // Creates an element to hold the image
+  // var $movie = $("<div>");
+
+  // var $poster = $("<img>");
+  
+
+  // var $title = $("<h2>");
+  $title.text(result.Classic[0].cardSet);
+          $movie.append($title);
+
+          // for(var i= 0; i <result.Classic.length; i++)
+          // {
+          //   $title.append("<div>");
+          //   $title.append(result.Classic[i].name);
+          //   $("#title-view").append("<div>"+result.Classic[i].name+"</div>");
+          // }
+
+          for(var j= 0; j < result.Missions.length; j++)
+          {
+
+            if(result.Missions[j].img)
+            {
+              $("#movies-view").append("<img src=" + result.Missions[j].img + ">")
+              $("#title-view").append("<div>" + j + " " +result.Missions[j].name + "</div>")
+
+            }
+
+            
+
+  //           $poster.attr("src", result.Naxxramas[j].img);
+  //           console.log($poster);
+  // // Appends the image
+  // $movie.append($poster);
+  // console.log($poster)
+  // // Puts the entire Movie above the previous movies.
+  // $("#movies-view").append($poster);
+  
+
+          }
+
+          
+})
+    };
+
+    // Search the OMDB API for the following movies, and append table rows for each
+    searchOMDB();
+  
+
+
+
+
+
+
+  
+  </script>
+</body>
+
+</html>
